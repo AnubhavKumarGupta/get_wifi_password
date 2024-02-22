@@ -1,40 +1,34 @@
-# get_wifi_password
+# Wi-Fi Password Extractor
 
-This code retrieves the Wi-Fi network profiles and their associated passwords on a Windows system using the `netsh` command-line utility. Here's a breakdown of how the code works:
+This Python script allows you to extract and display Wi-Fi passwords saved on your Windows system. It utilizes the `netsh` command-line utility to retrieve the saved Wi-Fi profiles and their corresponding passwords.
 
-1. The code begins by importing the `subprocess` module, which allows the execution of system commands from within Python.
+## How to Use
+1. Run the Python script.
+2. The script will extract the saved Wi-Fi profiles and their passwords.
+3. It will then display the Wi-Fi profile names along with their passwords.
 
-2. The `netsh wlan show profiles` command is executed using `subprocess.check_output()`. This command retrieves a list of all Wi-Fi profiles stored on the system. The output of the command is captured and stored in the `data` variable.
+## Features
+- Extracts and displays saved Wi-Fi passwords on a Windows system.
+- Utilizes the `netsh` command-line utility to retrieve Wi-Fi profiles and passwords.
+- Provides a simple and convenient way to access saved Wi-Fi passwords.
 
-3. The captured output is then decoded from bytes to a string using the UTF-8 encoding and split into a list of lines using the `split("\n")` method. Each line represents a Wi-Fi profile.
+## Requirements
+- Python installed on your system.
+- Windows operating system.
 
-4. A list comprehension is used to iterate over the lines of `data` and extract the profile names. The line `"All User Profile"` is used as a filter to ensure only relevant lines are considered. The extracted profile names are stored in the `profiles` list.
+## Running the Script
+Simply run the Python script using the Python interpreter:
 
-5. A `for` loop is used to iterate over each profile in the `profiles` list.
+```bash
+python wifi_password_extractor.py
+```
 
-6. Within the loop, the `netsh wlan show profile <profile_name> key=clear` command is executed for each profile. This command retrieves the specific profile's details, including the Wi-Fi password, if available. The output is captured and stored in the `results` variable.
-
-7. Similar to step 3, the captured output is decoded, split into lines, and stored in the `results` list.
-
-8. Another list comprehension is used to extract the Wi-Fi passwords from the `results` list. The line `"Key Content"` is used as a filter to ensure only relevant lines are considered. The extracted passwords are stored in the `results` list.
-
-9. A `try-except` block is used to handle any potential `IndexError` that might occur if there are no passwords found for a specific profile. If an `IndexError` occurs, an empty string is printed for the profile's password.
-
-10. Finally, the profile names and passwords (or empty strings) are printed in a formatted manner using `print()`.
-
-The code essentially uses the `netsh` command-line utility to gather information about Wi-Fi profiles on a Windows system and extract their associated passwords, if available.
-
-
-----------------------------------------------------------------------------------------------------------------------------------
+## Note
+- This script requires administrative privileges to retrieve Wi-Fi passwords.
+- It uses the `subprocess` module to execute shell commands and parse the output.
+- The extracted passwords are displayed along with the corresponding Wi-Fi profile names.
 
 
+---
 
-UTF-8 (Unicode Transformation Format-8) is an encoding scheme for representing characters in a Unicode character set. It is one of the most widely used character encodings and supports a vast range of characters from various scripts and languages.
-
-Unicode is a standard that assigns a unique number (code point) to every character across different writing systems and symbol sets. UTF-8 is a variable-width encoding, which means that it can represent characters using different numbers of bytes. It uses one to four bytes per character, depending on the Unicode code point.
-
-UTF-8 is backward-compatible with ASCII (American Standard Code for Information Interchange). ASCII characters (with code points from 0 to 127) are represented using a single byte in UTF-8, making it compatible with the ASCII character set.
-
-The advantage of UTF-8 is its ability to represent characters from multiple languages in a compact and efficient manner. It supports internationalization and allows software applications to handle and display text in different languages.
-
-In the provided code, the `.decode("utf-8")` method is used to convert the output of the `subprocess.check_output()` function, which is in bytes, into a string using the UTF-8 encoding. This allows the subsequent manipulation and processing of the retrieved data as human-readable text.
+**Author:** Anubhav Kumar Gupta
